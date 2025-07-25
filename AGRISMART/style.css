@@ -1,0 +1,39 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2cb00cfc-64e2-4097-a2cd-79b39fef5972",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "/* app/static/css/style.css */\n",
+    "/* Custom styles (override Bootstrap defaults if needed) */\n",
+    "body {\n",
+    "    background-color: #f8f9fa;\n",
+    "}\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "anaconda-panel-2023.05-py310",
+   "language": "python",
+   "name": "conda-env-anaconda-panel-2023.05-py310-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

@@ -1,0 +1,30 @@
+<!-- app/templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Enter Farm Details</h2>
+<form method="post" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.soil_type.label }} {{ form.soil_type(class="form-select") }}
+  </div>
+  <div class="mb-3">
+    {{ form.ph.label }} {{ form.ph(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.nitrogen.label }} {{ form.nitrogen(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.phosphorus.label }} {{ form.phosphorus(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.potassium.label }} {{ form.potassium(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.location.label }} {{ form.location(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.image.label }} {{ form.image(class="form-control") }}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

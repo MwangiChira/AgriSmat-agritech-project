@@ -1,0 +1,9 @@
+Flask
+Flask-WTF
+WTForms
+gunicorn
+torch
+torchvision
+pillow
+requests
+africastalking

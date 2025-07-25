@@ -1,0 +1,32 @@
+<!-- app/templates/results.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Insights for Your Farm</h2>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Recommended Crop</h5>
+    <p class="card-text">{{ crop }}</p>
+  </div>
+</div>
+{% if disease %}
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">Disease Detection Result</h5>
+    <p class="card-text">{{ disease }}</p>
+  </div>
+</div>
+{% endif %}
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">7-Day Weather Forecast</h5>
+    <ul class="list-group list-group-flush">
+      {% for day in weather['7_day_forecast'] %}
+      <li class="list-group-item">
+        <strong>{{ day.day }}:</strong> {{ day.temp }}, Rain: {{ day.rain }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<a href="{{ url_for('main.home') }}" class="btn btn-link mt-3"><< Back</a>
+{% endblock %}
