@@ -1,9 +1,5 @@
 Flask
 Flask-WTF
 WTForms
-gunicorn
-torch
-torchvision
-pillow
+Pillow
 requests
-africastalking

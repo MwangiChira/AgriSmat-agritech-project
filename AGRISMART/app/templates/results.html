@@ -1,0 +1,155 @@
+<!-- app/templates/results.html -->
+{% extends "base.html" %}
+
+{% block title %}Farm Analysis Results - AgriSmart{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-success">
+                <i class="bi bi-check-circle"></i> Analysis Results
+            </h1>
+            <p class="lead text-muted">
+                Here are your personalized farming insights based on the provided data
+            </p>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="row">
+            <!-- Crop Recommendation -->
+            <div class="col-lg-4 mb-4">
+                <div class="card crop-card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-award"></i> Recommended Crop
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <i class="bi bi-flower1 fs-1 mb-3"></i>
+                        <h3 class="fw-bold">{{ crop }}</h3>
+                        <p class="mb-0">
+                            Based on your soil conditions (pH: {{ soil_data.ph }}, 
+                            N: {{ soil_data.nitrogen }}ppm, 
+                            P: {{ soil_data.phosphorus }}ppm, 
+                            K: {{ soil_data.potassium }}ppm)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Detection -->
+            {% if disease %}
+            <div class="col-lg-4 mb-4">
+                <div class="card disease-card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-shield-check"></i> Disease Analysis
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <i class="bi bi-search fs-1 mb-3"></i>
+                        <h4>{{ disease }}</h4>
+                        {% if image_filename %}
+                            <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" 
+                                 class="img-thumbnail mt-2" style="max-width: 150px;">
+                        {% endif %}
+                        <p class="mt-2 mb-0">Analysis based on uploaded crop image</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Weather Forecast -->
+            <div class="col-lg-{{ '4' if disease else '8' }} mb-4">
+                <div class="card weather-card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-cloud-sun"></i> 7-Day Weather Forecast
+                        </h5>
+                        <small>{{ soil_data.location }}</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for day in weather['7_day_forecast'] %}
+                            <div class="col-md-{{ '12' if not disease else '6' }} mb-2">
+                                <div class="d-flex justify-content-between align-items-center bg-white bg-opacity-25 rounded p-2">
+                                    <div>
+                                        <strong>{{ day.day }}</strong>
+                                    </div>
+                                    <div class="text-end">
+                                        <div>{{ day.temp }}</div>
+                                        <small>Rain: {{ day.rain }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soil Analysis Summary -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-graph-down"></i> Soil Analysis Summary
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <div class="border rounded p-3">
+                                    <h6 class="text-muted">Soil Type</h6>
+                                    <h4 class="text-success">{{ soil_data.soil_type.title() }}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="border rounded p-3">
+                                    <h6 class="text-muted">pH Level</h6>
+                                    <h4 class="text-primary">{{ soil_data.ph }}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h6 class="text-muted">Nitrogen</h6>
+                                    <h4 class="text-info">{{ soil_data.nitrogen }}</h4>
+                                    <small class="text-muted">ppm</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h6 class="text-muted">Phosphorus</h6>
+                                    <h4 class="text-warning">{{ soil_data.phosphorus }}</h4>
+                                    <small class="text-muted">ppm</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="border rounded p-3">
+                                    <h6 class="text-muted">Potassium</h6>
+                                    <h4 class="text-danger">{{ soil_data.potassium }}</h4>
+                                    <small class="text-muted">ppm</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('main.home') }}" class="btn btn-outline-success btn-lg me-3">
+                <i class="bi bi-arrow-left"></i> New Analysis
+            </a>
+            <button class="btn btn-success btn-lg" onclick="window.print()">
+                <i class="bi bi-printer"></i> Print Results
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
